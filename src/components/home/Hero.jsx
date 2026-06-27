@@ -10,7 +10,7 @@ const Hero = () => {
 
       {/* Left Side: Content */}
       <div className="flex-1 space-y-5 text-center md:text-left relative z-10">
-        <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
+        <h1 className="text-4xl lg:text-6xl font-bold text-gray-800 leading-tight">
           Discover Your Next{" "}
           <span className="text-orange-500 relative inline-block">
             Great Book
