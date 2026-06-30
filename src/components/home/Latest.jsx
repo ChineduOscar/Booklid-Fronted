@@ -4,14 +4,18 @@ import { Link } from "react-router-dom";
 import { useAddToCart } from "../../hooks/useAddToCart";
 
 const Latest = () => {
-  const { addToCart, loadingBookId } = useAddToCart()
+  const { addToCart, loadingBookId } = useAddToCart();
   const { data, isLoading, error } = useQuery({
-    queryKey: ['books'],
+    queryKey: ["books"],
     queryFn: fetchBooks,
   });
 
-  if (isLoading) return <p className="text-center mt-10">Loading latest arrivals...</p>;
-  if (error) return <p className="text-center mt-10 text-red-500">Failed to load books.</p>;
+  if (isLoading)
+    return <p className="text-center mt-10">Loading latest arrivals...</p>;
+  if (error)
+    return (
+      <p className="text-center mt-10 text-red-500">Failed to load books.</p>
+    );
 
   return (
     <section className="mt-20">
@@ -20,9 +24,12 @@ const Latest = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
           Latest <span className="text-orange-500">Arrivals</span>
         </h2>
-        <a href="/books" className="text-xs font-bold uppercase tracking-wider text-orange-500 border-b border-orange-500 pb-0.5">
+        <Link
+          href="/books"
+          className="text-xs font-bold uppercase tracking-wider text-orange-500 border-b border-orange-500 pb-0.5"
+        >
           View all books
-        </a>
+        </Link>
       </div>
 
       {/* Grid */}
@@ -41,12 +48,15 @@ const Latest = () => {
               )}
               <Link to={`/book/${book._id}`}>
                 <img
-                    src={book.image}
-                    alt={book.title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => { e.target.src = 'https://placehold.co/300x450/f3f4f6/9ca3af?text=No+Cover' }}
-                  />
-                </Link>
+                  src={book.image}
+                  alt={book.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://placehold.co/300x450/f3f4f6/9ca3af?text=No+Cover";
+                  }}
+                />
+              </Link>
             </div>
 
             {/* Info */}
@@ -59,15 +69,20 @@ const Latest = () => {
               </div>
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-orange-500 font-bold text-sm">₦{book.price}</span>
+                  <span className="text-orange-500 font-bold text-sm">
+                    ₦{book.price}
+                  </span>
                   {book.oldPrice && (
-                    <span className="text-gray-300 text-[11px] line-through">₦{book.oldPrice}</span>
+                    <span className="text-gray-300 text-[11px] line-through">
+                      ₦{book.oldPrice}
+                    </span>
                   )}
                 </div>
                 <button
                   onClick={() => addToCart(book._id)}
-                  disabled={loadingBookId === book._id} 
-                  className="bg-orange-500 hover:bg-orange-600 text-white text-[10px] font-semibold uppercase tracking-wide px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap cursor-pointer">
+                  disabled={loadingBookId === book._id}
+                  className="bg-orange-500 hover:bg-orange-600 text-white text-[10px] font-semibold uppercase tracking-wide px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap cursor-pointer"
+                >
                   {loadingBookId === book._id ? "Adding..." : "Add to Cart"}
                 </button>
               </div>
