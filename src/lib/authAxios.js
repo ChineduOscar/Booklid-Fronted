@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 export const authApi = axios.create({
-  baseURL: "https://booklid-backend.onrender.com/api",
+  baseURL: "https://api-booklid-backend.onrender.com/api",
 });
 
 authApi.interceptors.request.use((config) => {
